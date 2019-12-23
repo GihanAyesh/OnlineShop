@@ -4,13 +4,23 @@ const path = require('path');
 const router=express.Router();
 const rootDir=require("../util/path.js");
 
-router.use('/add_product',(req,res,next)=>{
-    res.sendFile(path.join(rootDir,"views","add_product.html"));
+const products = [];
+
+router.get('/add_product',(req,res,next)=>{
+    res.render('add_product',{
+        docTitle:'Add Products',
+        path: '/add_product',
+        hasProducts: products.length >0,
+        activeShop:true,
+        productCSS: true
+    });
 });
 
-router.post('/get_product',(req,res,next)=>{
-    console.log(req.body);
+router.post('/add_product',(req,res,next)=>{
+    console.log (req.body);
+    products.push({title:req.body.title});
     res.redirect('/');
 });
 
-module.exports = router;
+exports.routes = router;
+exports.products = products;

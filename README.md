@@ -6,5 +6,8 @@ Technologies
   - Node.js
   - Express.js
   - MySQL
-  -body-parser
+  - ejs
+  - nodemon
+  - body-parser
+
   

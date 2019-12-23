@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('includes/head.ejs') %>
+<body>
+    <%- include('includes/navigation.ejs') %>
+    <h1>Welcome to the online shop</h1>
+    <p>My products are....</p>
+<main>
+    <% if(prods.length >0) { %>
+        <% for (let product of prods) { %>
+        <ul>
+            <li><%= product.title %> </li>
+        </ul>
+        <% } %>
+    <% } else { %>
+        <h3>No products</h3>
+    <% } %>
+</main>
+<%- include('includes/end.ejs') %>
