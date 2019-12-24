@@ -3,21 +3,19 @@ const bodyParser = require ('body-parser');
 const path = require ('path');
 
 const app=express();
-const rootDir=require("./util/path");
 
-const adminRouter = require('./routes/admin');
-const shopRouter = require('./routes/shop');
+const adminRoutes = require('./routes/admin');
+const shopRoutes = require('./routes/shop');
+const errorController = require ('./controllers/error');
 
 app.set('view engine','ejs');
 app.set('views','views');
 
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(express.static(path.join(rootDir,"public")));
-app.use(adminRouter.routes);
-app.use(shopRouter);
+app.use(express.static(path.join(__dirname,"public")));
+app.use(adminRoutes);
+app.use(shopRoutes);
 
-app.use((req,res,next) =>{
-    res.status(404).render('404',{docTitle: 'Page Not Found', path: ''});
-});
+app.use(errorController.wrongPage);
 
 app.listen(3000);
