@@ -1,27 +1,20 @@
 const Product = require('../models/product');
 
-exports.getProductPage = (req,res,next)=>{
-    res.render('add_product',{ 
-        docTitle:'Add Products',
-        path: '/add_product',
-        formCSS: true,
-        activeAddProduct:true,
+exports.getMainPage = (req,res,next)=>{
+    res.render('shop/index',{
+        docTitle:'Main',
+        path: '/',
+        activeShop:true,
         productCSS: true
     });
 };
 
-exports.addProducts = (req,res,next)=>{
-    const prod = new Product(req.body.title);
-    prod.save();
-    res.redirect('/');
-};
-
-exports.getMainPage = (req,res,next)=>{
+exports.getShopPage = (req,res,next)=>{
     const products = Product.fetchAll();
-    res.render('shop',{
+    res.render('shop/product_list',{
         prods: products,
         docTitle:'Shop',
-        path: '/',
+        path: '/shop/product_list',
         hasProducts: products.length >0,
         activeShop:true,
         productCSS: true
